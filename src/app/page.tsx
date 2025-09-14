@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 export default function Home() {
-  const [imageUrl, setImageUrl] = useState<File | null>(null);
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
   const [convertedImages, setConvertedImages] = useState<{ [key: string]: string }>({});
   const [file, setFile] = useState<File | null>(null);
 

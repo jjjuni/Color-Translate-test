@@ -27,7 +27,7 @@ export async function POST(req: Request) {
       // LAB 색 공간 변환
       const lab = chroma([r, g, b]).lab(); // [L, a, b]
 
-      let newLab = [...lab];
+      const newLab = [...lab];
 
       switch (type) {
         case "protanopia":
@@ -40,7 +40,7 @@ export async function POST(req: Request) {
       }
 
       // 다시 RGB로 변환
-      const [newR, newG, newB] = chroma.lab(newLab).rgb();
+      const [newR, newG, newB] = chroma.lab(newLab[0], newLab[1], newLab[2]).rgb();
 
       pixels[i] = Math.max(0, Math.min(255, Math.round(newR)));
       pixels[i + 1] = Math.max(0, Math.min(255, Math.round(newG)));
@@ -54,7 +54,7 @@ export async function POST(req: Request) {
       .png()
       .toBuffer();
 
-    return new Response(outputBuffer, {
+    return new Response(new Uint8Array(outputBuffer), {
       status: 200,
       headers: { "Content-Type": "image/png" },
     });
