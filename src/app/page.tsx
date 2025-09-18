@@ -22,7 +22,7 @@ export default function Home() {
 
     await Promise.all(
       types.map(async (type) => {
-        const res = await fetch(`/api/colorblind?type=${type}&alpha=0.7`, {
+        const res = await fetch(`/api/colorblind?type=${type}&alpha=1`, {
           method: "POST",
           body: file,
         });
@@ -48,14 +48,14 @@ export default function Home() {
       {imageUrl && (
         <div className="mt-4 flex flex-col gap-4">
           <div className="flex flex-row gap-4">
-            <img className="w-80 h-60 object-contain" src={imageUrl} alt="원본 이미지" />
+            <img className="w-[1000px] h-[800px] object-contain" src={imageUrl} alt="원본 이미지" />
           </div>
 
           <div className="flex flex-row gap-4">
             {types.map((type) => (
               <div key={type} className="flex flex-col items-center">
                 <img
-                  className="w-80 h-60 object-contain"
+                  className="w-[1000px] h-[800px] object-contain"
                   src={convertedImages[type]}
                   alt={`${type} 변환 이미지`}
                 />

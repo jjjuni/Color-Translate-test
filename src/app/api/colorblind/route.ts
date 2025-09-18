@@ -31,11 +31,13 @@ export async function POST(req: Request) {
 
       switch (type) {
         case "protanopia":
+          newLab[2] += alpha * lab[1]; // a* -> b* 매핑
+          break;
         case "deuteranopia":
           newLab[2] += alpha * lab[1]; // a* -> b* 매핑
           break;
         case "tritanopia":
-          newLab[1] += alpha * lab[2]; // b* -> a* 매핑
+          newLab[1] += alpha * 0.3 * lab[2]; // b* -> a* 매핑
           break;
       }
 
